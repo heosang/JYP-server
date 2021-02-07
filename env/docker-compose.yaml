@@ -1,0 +1,14 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13.1
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "jypdev"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "jyp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
