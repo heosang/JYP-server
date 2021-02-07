@@ -18,8 +18,8 @@ public class SwaggerConfig {
 
         OpenAPI openAPI = new OpenAPI();
         Info info = new Info();
-        info.setTitle("Kkiri-Eat Server API");
-        info.description("Kkiri-Eat Server API 명세");
+        info.setTitle("JYP Server API");
+        info.description("JYP Server API 명세");
         openAPI.setInfo(info);
         return openAPI;
     }

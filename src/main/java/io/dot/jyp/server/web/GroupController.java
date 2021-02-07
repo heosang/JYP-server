@@ -1,7 +1,8 @@
 package io.dot.jyp.server.web;
 
 import io.dot.jyp.server.application.GroupService;
-import io.dot.jyp.server.application.dto.*;
+import io.dot.jyp.server.application.dto.GroupCreateRequest;
+import io.dot.jyp.server.application.dto.GroupCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
