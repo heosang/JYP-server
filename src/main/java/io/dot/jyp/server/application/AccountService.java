@@ -33,6 +33,9 @@ public class AccountService {
 
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
+        this.accountRepository.existsByEmailThenThrow(request.getEmail());
+        this.accountRepository.existsByNicknameThenThrow(request.getNickname());
+
         Account account = Account.signup(
                 request.getEmail(),
                 this.passphraseEncoder.encode(request.getPassphrase()),
