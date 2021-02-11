@@ -1,7 +1,9 @@
 package io.dot.jyp.server.infra.auth;
 
 import io.dot.jyp.server.domain.Account;
+import io.dot.jyp.server.domain.Role;
 import io.dot.jyp.server.domain.exception.AuthenticationException;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,23 +11,24 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
+@AllArgsConstructor
 public class DefaultAccountDetails implements UserDetails {
     private final Account account;
-    private final GrantedAuthority grantedAuthorities;
-
-    public DefaultAccountDetails(Account account, GrantedAuthority grantedAuthorities) {
-        this.account = account;
-        this.grantedAuthorities = grantedAuthorities;
-    }
+    private final List<GrantedAuthority> grantedAuthorities;
 
     public static DefaultAccountDetails of(Account account) {
         return new DefaultAccountDetails(
                 account,
-                new SimpleGrantedAuthority(
-                        String.format("%s", account.getRole())
-                )
+                account.getRoles()
+                        .stream()
+                        .map(Role::getGrantedAuthorities)
+                        .flatMap(List::stream)
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -41,7 +44,7 @@ public class DefaultAccountDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.grantedAuthorities;
     }
 
     @Override
