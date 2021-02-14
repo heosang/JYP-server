@@ -1,4 +1,8 @@
 package io.dot.jyp.server.domain;
 
-public interface GroupRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface GroupRepository extends JpaRepository<Account, Long> {
 }

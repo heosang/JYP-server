@@ -1,6 +1,29 @@
 app:
+  name: jyp-server
+  security:
+    jwt:
+      expires-in:
+      secret:
+
+  thread:
+    email-service-pool:
+      size: 3
+
   jyp:
     url: http://localhost:8080
+    secret:
+    access-token:
+
+  cloud:
+    aws:
+
+  web:
+
+  social:
+    kakao:
+      client-id:
+      redirect:
+      url: https://dapi.kakao.com
 
 springdoc:
   version: '@project.version@'
@@ -18,8 +41,6 @@ springdoc:
     - /api/v1/**
     - /test/**
 
-server:
-  port: 8080
 
 spring:
   datasource:
