@@ -16,12 +16,12 @@ import javax.transaction.Transactional;
 
 @Qualifier("accountService")
 @Service
-public class AccountService {
+public class AccountApplicationService {
     private final AccountRepository accountRepository;
     private final PassphraseEncoder passphraseEncoder;
     private final PassphraseVerifier passphraseVerifier;
 
-    public AccountService(
+    public AccountApplicationService(
             AccountRepository accountRepository,
             PassphraseEncoder passphraseEncoder,
             PassphraseVerifier passphraseVerifier
