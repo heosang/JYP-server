@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Configuration
 @EnableJpaAuditing(dateTimeProviderRef = "utcDateTimeProvider")
-public class JPAConfig {
+public class JpaConfig {
     @Bean
     public DateTimeProvider utcDateTimeProvider() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
