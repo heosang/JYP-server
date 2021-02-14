@@ -6,14 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class GroupService {
+public class GameApplicationService {
     private final GroupRepository groupRepository;
 
-    public GroupService(
+    public GameApplicationService(
             GroupRepository groupRepository
     ) {
         this.groupRepository = groupRepository;
     }
-
-
 }

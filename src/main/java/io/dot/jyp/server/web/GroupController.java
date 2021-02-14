@@ -1,6 +1,6 @@
 package io.dot.jyp.server.web;
 
-import io.dot.jyp.server.application.GroupService;
+import io.dot.jyp.server.application.GroupApplicationService;
 import io.dot.jyp.server.application.dto.GroupCreateRequest;
 import io.dot.jyp.server.application.dto.GroupCreateResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/group")
 public class GroupController {
 
-    private final GroupService groupService;
+    private final GroupApplicationService groupApplicationService;
 
-    public GroupController(GroupService groupService) {
-        this.groupService = groupService;
+    public GroupController(GroupApplicationService groupApplicationService) {
+        this.groupApplicationService = groupApplicationService;
     }
 
     @PostMapping("/create")

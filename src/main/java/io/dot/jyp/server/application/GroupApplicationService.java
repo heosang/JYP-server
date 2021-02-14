@@ -5,5 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class GameService {
+public class GroupApplicationService {
+    public void createGroup(){
+
+    }
 }
