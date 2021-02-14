@@ -42,13 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                    .antMatchers("/api/v1/user/login", "/api/v1/user/signup", "/api/v1/user").permitAll() // 누구나 접근 허용
-                    //.antMatchers("/api/v1/group/create").permitAll()
-                    .antMatchers("/").hasRole("ORGANIZATION_USER") // USER, ADMIN만 접근 가능
-                    .antMatchers("/admin").hasRole("ORGANIZATION_ADMIN") // ADMIN만 접근 가능
-                    .anyRequest()
-                    .authenticated();
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/", "/api/v1/**", "/test/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**").permitAll()
+                .antMatchers("/api/v1/user").hasRole("ORGANIZATION_USER")
+                .antMatchers("/api/v1/user/admin").hasRole("ORGANIZATION_ADMIN")
+                .anyRequest()
+                .authenticated();
     }
 
     @Override

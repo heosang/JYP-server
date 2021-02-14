@@ -44,7 +44,7 @@ public class Authority {
     private List<Permission> permissions;
 
     public Authority(Name name, List<Permission> permissions) {
-        if ((int) permissions.stream().map(Permission::getTarget).distinct().count()!=1){
+        if ((int) permissions.stream().map(Permission::getTarget).distinct().count() != 1) {
             throw new IllegalArgumentException("permissions should have all same targets");
         }
         this.name = name;
@@ -80,7 +80,7 @@ public class Authority {
     public enum Name {
         ORGANIZATION_ADMIN("ORGANIZATION_ADMIN", Resource.Type.ORGANIZATION),
         ORGANIZATION_MANAGER("ORGANIZATION_MANAGER", Resource.Type.ORGANIZATION),
-        ORGANIZATION_USER("ORGANIZATION_USER",Resource.Type.ORGANIZATION),
+        ORGANIZATION_USER("ORGANIZATION_USER", Resource.Type.ORGANIZATION),
 
         GROUP_HOST("GROUP_HOST", Resource.Type.GROUP),
         GROUP_GUEST("GROUP_GUEST", Resource.Type.GROUP),

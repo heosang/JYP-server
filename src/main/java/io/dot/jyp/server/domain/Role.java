@@ -36,7 +36,7 @@ public class Role {
     private Account account;
 
     private Role(Authority authority, Resource resource) {
-        if (!authority.getResourceType().equals(resource.getType())){
+        if (!authority.getResourceType().equals(resource.getType())) {
             throw new IllegalArgumentException("unmatched resource type");
         }
         this.authority = authority;
@@ -61,9 +61,11 @@ public class Role {
     public boolean isAdmin() {
         return this.isSameAuthority(Authority.Name.ORGANIZATION_ADMIN);
     }
+
     public boolean isManager() {
         return this.isSameAuthority(Authority.Name.ORGANIZATION_MANAGER);
     }
+
     public boolean isUser() {
         return this.isSameAuthority(Authority.Name.ORGANIZATION_USER);
     }

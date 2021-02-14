@@ -29,15 +29,16 @@ public class Resource {
         return of(id, Type.of(type));
     }
 
-    public static Resource organization (String id) {
+    public static Resource organization(String id) {
         return new Resource(id, Type.ORGANIZATION);
-    }
-    public boolean isOrganization () {
-        return this.type.equals(Type.ORGANIZATION);
     }
 
     public static Resource group(String id) {
         return new Resource(id, Type.GROUP);
+    }
+
+    public boolean isOrganization() {
+        return this.type.equals(Type.ORGANIZATION);
     }
 
     public boolean isGroup() {

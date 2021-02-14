@@ -14,6 +14,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             throw new BadRequestException(String.format("Email '%s' is already exist", email), ErrorCode.DUPLICATED_EMAIL);
         }
     }
+
     boolean existsByEmail(String email);
 
     default void existsByNicknameThenThrow(String nickname) {
@@ -21,8 +22,10 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             throw new BadRequestException(String.format("Nickname '%s' is already exist", nickname), ErrorCode.DUPLICATED_NICKNAME);
         }
     }
+
     boolean existsByNickname(String nickname);
 
     Optional<Account> findWithRoleByEmailAndStatus(String email, Account.Status status);
+
     Optional<Account> findByEmail(String email);
 }

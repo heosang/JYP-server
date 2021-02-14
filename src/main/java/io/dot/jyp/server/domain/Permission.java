@@ -2,7 +2,6 @@ package io.dot.jyp.server.domain;
 
 
 import lombok.Getter;
-import org.apache.coyote.Response;
 
 import java.util.Arrays;
 

@@ -141,6 +141,7 @@ public class Account {
             );
         }
     }
+
     public boolean hasAnyRoleOf(Resource resource) {
         return this.roles.stream()
                 .anyMatch(role -> role.getResource().equals(resource));
