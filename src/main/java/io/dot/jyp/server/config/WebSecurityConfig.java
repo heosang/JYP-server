@@ -1,9 +1,9 @@
 package io.dot.jyp.server.config;
 
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     public WebSecurityConfig(
-            @Qualifier("accountDetailsService") UserDetailsService userDetailsService) {
+            @Qualifier("accountDetailsService") UserDetailsService userDetailsService
+    ) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -39,13 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin().disable()
-                .authorizeRequests() // 7
-                .antMatchers("/api/v1/user/login", "/api/v1/user/signup", "/api/v1/user").permitAll() // 누구나 접근 허용
-                .antMatchers("/api/v1/group/create").permitAll()
-                .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
-                .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
-                .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
-        ;
+                .httpBasic().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/", "/api/v1/**", "/test/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**").permitAll()
+                .antMatchers("/api/v1/user").hasRole("ORGANIZATION_USER")
+                .antMatchers("/api/v1/user/admin").hasRole("ORGANIZATION_ADMIN")
+                .anyRequest()
+                .authenticated();
     }
 
     @Override

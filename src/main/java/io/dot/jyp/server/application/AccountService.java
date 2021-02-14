@@ -33,12 +33,15 @@ public class AccountService {
 
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
-        accountRepository.save(
-                Account.signup(
-                        request.getEmail(),
-                        this.passphraseEncoder.encode(request.getPassphrase()),
-                        request.getNickname())
-        );
+        this.accountRepository.existsByEmailThenThrow(request.getEmail());
+        this.accountRepository.existsByNicknameThenThrow(request.getNickname());
+
+        Account account = Account.signup(
+                request.getEmail(),
+                this.passphraseEncoder.encode(request.getPassphrase()),
+                request.getNickname());
+
+        this.accountRepository.save(account);
         return SignUpResponse.of(request.getNickname());
     }
 
