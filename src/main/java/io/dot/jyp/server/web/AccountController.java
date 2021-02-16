@@ -1,11 +1,13 @@
 package io.dot.jyp.server.web;
 
 import io.dot.jyp.server.application.AccountApplicationService;
-import io.dot.jyp.server.application.dto.LoginRequest;
-import io.dot.jyp.server.application.dto.SignUpRequest;
-import io.dot.jyp.server.application.dto.SignUpResponse;
+import io.dot.jyp.server.application.dto.*;
+import io.dot.jyp.server.config.UserAccount;
+import io.dot.jyp.server.domain.Account;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -31,4 +33,36 @@ public class AccountController {
         accountApplicationService.login(request);
     }
 
+    @PatchMapping("/{accountId}/nickname")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PreAuthorize("#account.id == #accountId")
+    public void changeNickname(
+            @Parameter(hidden = true) @UserAccount final Account account,
+            @PathVariable final String accountId,
+            @RequestBody final ChangeAccountNicknameRequest request
+    ) {
+        this.accountApplicationService.changeNickname(account, request);
+    }
+
+    @PatchMapping("/{accountId}/passphrase")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PreAuthorize("#account.id == #accountId")
+    public void changePassphrase(
+            @Parameter(hidden = true) @UserAccount final Account account,
+            @PathVariable final String accountId,
+            @RequestBody final ChangePassphraseRequest request
+    ) {
+        this.accountApplicationService.changePassphrase(account, request);
+    }
+
+    @PostMapping("/{accountId}/passphrase/verify")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PreAuthorize("#account.id == #accountId")
+    public void verifyPassphrase(
+            @Parameter(hidden = true) @UserAccount final Account account,
+            @PathVariable final String accountId,
+            @RequestBody final VerifyPassphraseRequest request
+    ) {
+        this.accountApplicationService.verifyPassphrase(accountId, request.getPassphrase());
+    }
 }

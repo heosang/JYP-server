@@ -1,8 +1,6 @@
 package io.dot.jyp.server.application;
 
-import io.dot.jyp.server.application.dto.LoginRequest;
-import io.dot.jyp.server.application.dto.SignUpRequest;
-import io.dot.jyp.server.application.dto.SignUpResponse;
+import io.dot.jyp.server.application.dto.*;
 import io.dot.jyp.server.domain.Account;
 import io.dot.jyp.server.domain.AccountRepository;
 import io.dot.jyp.server.domain.PassphraseEncoder;
@@ -11,8 +9,7 @@ import io.dot.jyp.server.domain.exception.BadRequestException;
 import io.dot.jyp.server.domain.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Qualifier("accountService")
 @Service
@@ -53,4 +50,22 @@ public class AccountApplicationService {
         this.passphraseVerifier.validate(account.getEmail(), request.getPassphrase());
         this.accountRepository.save(account);
     }
+
+    @Transactional
+    public void changeNickname(Account account, ChangeAccountNicknameRequest request) {
+        account.updateName(request.getName());
+        this.accountRepository.save(account);
+    }
+
+    @Transactional
+    public void changePassphrase(Account account, ChangePassphraseRequest request) {
+        account.updatePassphrase(this.passphraseEncoder.encode(request.getNewPassphrase()));
+        this.accountRepository.save(account);
+    }
+
+    @Transactional(readOnly = true)
+    public void verifyPassphrase(String email, String passphrase) {
+        this.passphraseVerifier.validate(email, passphrase);
+    }
+
 }
