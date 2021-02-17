@@ -14,16 +14,6 @@ configurations {
     }
 }
 
-ext.profile = (!project.hasProperty('profile') || !profile) ? 'dev' : profile
-
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources", "src/main/resources-${profile}"
-        }
-    }
-}
-
 repositories {
     mavenCentral()
 }

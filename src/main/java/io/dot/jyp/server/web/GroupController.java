@@ -18,6 +18,12 @@ public class GroupController {
         this.groupApplicationService = groupApplicationService;
     }
 
+    @GetMapping("/main")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String main() {
+        return "Hello DOT!";
+    }
+
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public GroupCreateResponse create(@RequestBody final GroupCreateRequest request) {
