@@ -1,5 +1,9 @@
 spring:
-  profiles: dev
+  application:
+    name: jyp-server-dev
+  config:
+    activate:
+      on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/jyp-dev
     username: jypdev
