@@ -1,6 +1,9 @@
 spring:
   application:
     name: jyp-server-dev
+  config:
+    activate:
+      on-profile: default
   datasource:
     url: jdbc:postgresql://localhost:5432/jyp-dev
     username: jypdev
@@ -72,3 +75,9 @@ springdoc:
   paths-to-match:
     - /api/v1/**
     - /test/**
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: true
