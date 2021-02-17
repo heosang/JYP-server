@@ -54,3 +54,9 @@ springdoc:
   paths-to-match:
     - /api/v1/**
     - /test/**
+
+server:
+  port: ${PORT}
+  error:
+    whitelabel:
+      enabled: true
