@@ -1,7 +1,5 @@
 package io.dot.jyp.server.application.dto;
 
-import io.dot.jyp.server.domain.Account;
-import io.dot.jyp.server.domain.Diner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GroupCreateRequest {
-    private Account account;
-    private Diner diner;
-
-
+public class GroupMessageRequest {
+    private int id;
+    private int messageId;
 }
