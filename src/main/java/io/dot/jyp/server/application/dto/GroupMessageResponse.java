@@ -7,16 +7,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GroupCreateResponse {
+public class GroupMessageResponse {
     private int id;
+    private String message;
     private String name;
 
-    public static GroupCreateResponse of(
+    public static GroupMessageResponse of(
             int id,
+            String message,
             String name
     ) {
-        return new GroupCreateResponse(
+        return new GroupMessageResponse(
                 id,
+                message,
                 name
         );
     }
