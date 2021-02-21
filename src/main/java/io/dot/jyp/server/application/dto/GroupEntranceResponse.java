@@ -5,22 +5,22 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class GroupAdmissionResponse {
+public class GroupEntranceResponse {
     private int id;
     private String name;
 
-    private GroupAdmissionResponse(
+    private GroupEntranceResponse(
             int id,
             String name) {
         this.id = id;
         this.name = name;
     }
 
-    public static GroupAdmissionResponse of(
+    public static GroupEntranceResponse of(
             int id,
             String name
     ) {
-        return new GroupAdmissionResponse(
+        return new GroupEntranceResponse(
                 id,
                 name
         );
