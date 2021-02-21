@@ -29,11 +29,11 @@ public class GroupController {
     }
     @PostMapping("/in/{groupId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public GroupAdmissionResponse admission(
+    public GroupEntranceResponse admission(
             @RequestBody final GroupCreateRequest request,
             @PathVariable final String groupId
     ) {
-        return GroupAdmissionResponse.of(
+        return GroupEntranceResponse.of(
                 2,
                 "배고픈 두더지"
         );
