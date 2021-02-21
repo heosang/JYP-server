@@ -29,7 +29,7 @@ public class GroupController {
     }
     @PostMapping("/in/{groupId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public GroupEntranceResponse admission(
+    public GroupEntranceResponse entrance(
             @RequestBody final GroupCreateRequest request,
             @PathVariable final String groupId
     ) {
