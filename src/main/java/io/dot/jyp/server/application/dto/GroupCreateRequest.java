@@ -6,12 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class GroupCreateRequest {
     private Account account;
-    private Diner diner;
+    private List<Diner> diners;
 
 
 }
