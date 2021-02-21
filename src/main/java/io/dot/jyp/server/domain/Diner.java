@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "diners", indexes = {
-//        @Index(name = "diners_group_id", columnList = "group_id"),
-//})
+@Table(name = "diners", indexes = {
+        @Index(name = "diners_group_id", columnList = "group_id"),
+})
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,15 +23,22 @@ public class Diner {
     @Column(name = "kind", nullable = false)
     private String kind;
 
-    //@Column(name = "latitude", nullable = false)
-    //private double latitude;
-    //@Column(name = "longitude", nullable = false)
-    //private double longitude;
+    @Column(name = "selectors-nickname", nullable = false)
+    private String selectorsNickname;
     public Diner(
             String name,
             String kind
     ){
         this.name = name;
         this.kind = kind;
+    }
+    public Diner(
+            String name,
+            String kind,
+            String selectorsNickname
+    ){
+        this.name = name;
+        this.kind = kind;
+        this.selectorsNickname=selectorsNickname;
     }
 }
