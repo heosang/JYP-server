@@ -23,6 +23,10 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
         }
     }
 
+    default Account findByIdOrElseThrow(Long id) {
+        return this.findById(id).orElseThrow(() -> new BadRequestException(String.format("Account '%s' does not exist", id)));
+    }
+
     boolean existsByNickname(String nickname);
 
     Optional<Account> findWithRoleByEmailAndStatus(String email, Account.Status status);

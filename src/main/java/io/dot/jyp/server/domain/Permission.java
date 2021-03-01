@@ -8,10 +8,10 @@ import java.util.Arrays;
 @Getter
 public enum Permission {
     // Org Operation Permission
-    CREATE_GROUP(Name.CREATE_GROUP, Resource.Type.GROUP),
-    CREATE_GROUP_ACCOUNTS(Name.CREATE_GROUP_ACCOUNTS, Resource.Type.GROUP),
 
     // Common Group Permission
+    CREATE_GROUP(Name.CREATE_GROUP, Resource.Type.GROUP),
+    CREATE_GROUP_ACCOUNTS(Name.CREATE_GROUP_ACCOUNTS, Resource.Type.GROUP),
     CHANGE_GROUP_NAME(Name.CHANGE_GROUP_NAME, Resource.Type.GROUP),
     INVITE_GROUP_ACCOUNTS(Name.INVITE_GROUP_ACCOUNTS, Resource.Type.GROUP),
     RE_INVITE_GROUP_ACCOUNTS(Name.RE_INVITE_GROUP_ACCOUNTS, Resource.Type.GROUP),
@@ -48,7 +48,6 @@ public enum Permission {
     public static class Name {
         public static final String CREATE_GROUP = "CREATE_GROUP";
         public static final String CREATE_GROUP_ACCOUNTS = "CREATE_GROUP_ACCOUNTS";
-
         public static final String CHANGE_GROUP_NAME = "CHANGE_GROUP_NAME";
         public static final String INVITE_GROUP_ACCOUNTS = "INVITE_GROUP_ACCOUNTS";
         public static final String RE_INVITE_GROUP_ACCOUNTS = "RE_INVITE_GROUP_ACCOUNTS";

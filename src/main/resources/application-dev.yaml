@@ -17,7 +17,7 @@ spring:
         stringtype: unspecified
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -45,6 +45,8 @@ app:
     url: http://localhost:8080
     secret:
     access-token:
+    file:
+      nickname-path: src/main/resources/nickname.csv
 
   cloud:
     aws:

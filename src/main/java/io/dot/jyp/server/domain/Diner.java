@@ -28,7 +28,7 @@ public class Diner {
     public Diner(
             String name,
             String kind
-    ){
+    ) {
         this.name = name;
         this.kind = kind;
     }
