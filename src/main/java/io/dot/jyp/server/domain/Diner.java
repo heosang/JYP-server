@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 @Table(name = "diners", indexes = {
         @Index(name = "diners_group_id", columnList = "group_id"),
 })
@@ -22,23 +22,27 @@ public class Diner {
     private String name;
     @Column(name = "kind", nullable = false)
     private String kind;
+    @Column(name = "latitude")
+    private double latitude;
+    @Column(name = "longitude")
+    private double longitude;
 
-    @Column(name = "selectors-nickname", nullable = false)
-    private String selectorsNickname;
     public Diner(
             String name,
             String kind
-    ) {
+    ){
         this.name = name;
         this.kind = kind;
     }
     public Diner(
             String name,
             String kind,
-            String selectorsNickname
+            double latitude,
+            double longitude
     ){
         this.name = name;
         this.kind = kind;
-        this.selectorsNickname=selectorsNickname;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
