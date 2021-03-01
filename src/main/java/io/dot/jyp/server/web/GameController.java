@@ -1,6 +1,7 @@
 package io.dot.jyp.server.web;
 
 import io.dot.jyp.server.application.GameApplicationService;
+import io.dot.jyp.server.application.GroupApplicationService;
 import io.dot.jyp.server.application.dto.GameStartRequest;
 import io.dot.jyp.server.application.dto.GameStartResponse;
 import lombok.extern.slf4j.Slf4j;

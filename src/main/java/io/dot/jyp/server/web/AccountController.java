@@ -23,13 +23,13 @@ public class AccountController {
 
     @PostMapping("/signup")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void signUp(@RequestBody final AccountSignUpRequest request) {
-        accountApplicationService.signUp(request);
+    public SignUpResponse signUp(@RequestBody final SignUpRequest request) {
+        return accountApplicationService.signUp(request);
     }
 
     @PostMapping("/login")
     @ResponseStatus(value = HttpStatus.OK)
-    public void login(@RequestBody final AccountLoginRequest request) {
+    public void login(@RequestBody final LoginRequest request) {
         accountApplicationService.login(request);
     }
 
@@ -39,7 +39,7 @@ public class AccountController {
     public void changeNickname(
             @Parameter(hidden = true) @UserAccount final Account account,
             @PathVariable final String accountId,
-            @RequestBody final AccountChangeNicknameRequest request
+            @RequestBody final ChangeAccountNicknameRequest request
     ) {
         this.accountApplicationService.changeNickname(account, request);
     }
@@ -50,7 +50,7 @@ public class AccountController {
     public void changePassphrase(
             @Parameter(hidden = true) @UserAccount final Account account,
             @PathVariable final String accountId,
-            @RequestBody final AccountChangePassphraseRequest request
+            @RequestBody final ChangePassphraseRequest request
     ) {
         this.accountApplicationService.changePassphrase(account, request);
     }
@@ -61,7 +61,7 @@ public class AccountController {
     public void verifyPassphrase(
             @Parameter(hidden = true) @UserAccount final Account account,
             @PathVariable final String accountId,
-            @RequestBody final AccountVerifyPassphraseRequest request
+            @RequestBody final VerifyPassphraseRequest request
     ) {
         this.accountApplicationService.verifyPassphrase(accountId, request.getPassphrase());
     }

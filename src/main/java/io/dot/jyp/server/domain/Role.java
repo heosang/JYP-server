@@ -19,7 +19,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authority_id", foreignKey = @ForeignKey(name = "fk_authority_id"), nullable = false)

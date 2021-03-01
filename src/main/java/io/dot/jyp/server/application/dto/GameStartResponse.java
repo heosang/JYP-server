@@ -1,5 +1,6 @@
 package io.dot.jyp.server.application.dto;
 
+import io.dot.jyp.server.domain.Diner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -22,7 +22,7 @@ public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false)
     @Enumerated(EnumType.STRING)

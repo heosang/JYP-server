@@ -1,15 +1,15 @@
 package io.dot.jyp.server.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AccountChangePassphraseRequest {
+public class ChangeAccountNicknameRequest {
     @Schema(required = true)
-    @ToString.Exclude
-    private String passphrase;
-    @Schema(required = true)
-    private String newPassphrase;
+    private String name;
 }
