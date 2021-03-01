@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class GameApplicationService {
-  
+
     private final GroupRepository groupRepository;
 
     public GameApplicationService(

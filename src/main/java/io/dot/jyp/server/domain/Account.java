@@ -26,7 +26,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -34,7 +34,7 @@ public class Account {
     @Column(name = "passphrase", nullable = false)
     private String passphrase;
 
-    @Column(name = "nickname", nullable = false)
+    @Column(name = "nickname")
     private String nickname;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -65,13 +65,11 @@ public class Account {
     private Account(
             String email,
             String passphrase,
-            String nickname,
             Status status,
             LocalDateTime created_at
     ) {
         this.email = email;
         this.passphrase = passphrase;
-        this.nickname = nickname;
         this.status = status;
         this.created_at = created_at;
     }
@@ -94,13 +92,11 @@ public class Account {
 
     public static Account signup(
             String email,
-            String passphrase,
-            String nickname
+            String passphrase
     ) {
         return new Account(
                 email,
                 passphrase,
-                nickname,
                 Status.ACTIVE,
                 LocalDateTime.now(ZoneId.of("Asia/Seoul"))
         );
@@ -185,6 +181,13 @@ public class Account {
         return account;
     }
 
+    public void deleteAllRolesByResource(Resource resource) {
+        if (this.isAdmin()) {
+            throw new AuthenticationException("cannot access wallet operator's wallet role");
+        }
+        this.roles.removeIf(role -> role.getResource().equals(resource));
+    }
+
     private void delete() {
         if (!this.isActive()) {
             throw new BadRequestException("you can delete only active account");
@@ -195,7 +198,7 @@ public class Account {
         this.roles.clear();
     }
 
-    public void updateName(String nickname) {
+    public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
 

@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class VerifyPassphraseRequest {
+public class AccountVerifyPassphraseRequest {
     @Schema(required = true)
     @ToString.Exclude
     private String passphrase;

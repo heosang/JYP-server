@@ -1,10 +1,7 @@
 package io.dot.jyp.server.application;
 
 import io.dot.jyp.server.application.dto.*;
-import io.dot.jyp.server.domain.Account;
-import io.dot.jyp.server.domain.AccountRepository;
-import io.dot.jyp.server.domain.PassphraseEncoder;
-import io.dot.jyp.server.domain.PassphraseVerifier;
+import io.dot.jyp.server.domain.*;
 import io.dot.jyp.server.domain.exception.BadRequestException;
 import io.dot.jyp.server.domain.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,33 +14,35 @@ public class AccountApplicationService {
     private final AccountRepository accountRepository;
     private final PassphraseEncoder passphraseEncoder;
     private final PassphraseVerifier passphraseVerifier;
+    private final RoleRepository roleRepository;
+    private final AuthorityRepository authorityRepository;
 
     public AccountApplicationService(
             AccountRepository accountRepository,
             PassphraseEncoder passphraseEncoder,
-            PassphraseVerifier passphraseVerifier
-    ) {
+            PassphraseVerifier passphraseVerifier,
+            RoleRepository roleRepository, AuthorityRepository authorityRepository) {
         this.accountRepository = accountRepository;
         this.passphraseEncoder = passphraseEncoder;
         this.passphraseVerifier = passphraseVerifier;
+        this.roleRepository = roleRepository;
+        this.authorityRepository = authorityRepository;
     }
 
     @Transactional
-    public SignUpResponse signUp(SignUpRequest request) {
+    public void signUp(AccountSignUpRequest request) {
         this.accountRepository.existsByEmailThenThrow(request.getEmail());
-        this.accountRepository.existsByNicknameThenThrow(request.getNickname());
 
-        Account account = Account.signup(
+        Account targetAccount = Account.signup(
                 request.getEmail(),
-                this.passphraseEncoder.encode(request.getPassphrase()),
-                request.getNickname());
+                this.passphraseEncoder.encode(request.getPassphrase())
+        );
 
-        this.accountRepository.save(account);
-        return SignUpResponse.of(request.getNickname());
+        this.accountRepository.save(targetAccount);
     }
 
     @Transactional
-    public void login(LoginRequest request) {
+    public void login(AccountLoginRequest request) {
         String email = request.getEmail();
         Account account = accountRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new BadRequestException(String.format("user email '%s' does not exist", email), ErrorCode.EMAIL_DOES_NOT_EXIST));
@@ -52,13 +51,13 @@ public class AccountApplicationService {
     }
 
     @Transactional
-    public void changeNickname(Account account, ChangeAccountNicknameRequest request) {
-        account.updateName(request.getName());
+    public void changeNickname(Account account, AccountChangeNicknameRequest request) {
+        account.updateNickname(request.getName());
         this.accountRepository.save(account);
     }
 
     @Transactional
-    public void changePassphrase(Account account, ChangePassphraseRequest request) {
+    public void changePassphrase(Account account, AccountChangePassphraseRequest request) {
         account.updatePassphrase(this.passphraseEncoder.encode(request.getNewPassphrase()));
         this.accountRepository.save(account);
     }
