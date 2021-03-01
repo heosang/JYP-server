@@ -16,24 +16,24 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 public class Resource {
-    private String id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public static Resource of(String id, Type type) {
+    public static Resource of(Long id, Type type) {
         return new Resource(id, type);
     }
 
-    public static Resource of(String id, String type) {
+    public static Resource of(Long id, String type) {
         return of(id, Type.of(type));
     }
 
-    public static Resource organization(String id) {
+    public static Resource organization(Long id) {
         return new Resource(id, Type.ORGANIZATION);
     }
 
-    public static Resource group(String id) {
+    public static Resource group(Long id) {
         return new Resource(id, Type.GROUP);
     }
 

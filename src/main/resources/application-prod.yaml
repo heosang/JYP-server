@@ -16,6 +16,8 @@ app:
     url: https://project-jyp.herokuapp.com
     secret:
     access-token:
+    file:
+      nickname-path: src/main/resources/nickname.csv
 
   cloud:
     aws:

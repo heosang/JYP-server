@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GroupCreateResponse {
-    private int id;
+    private Long id;
     private String name;
 
     public static GroupCreateResponse of(
-            int id,
+            Long id,
             String name
     ) {
         return new GroupCreateResponse(
