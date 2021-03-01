@@ -11,10 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Entity
 @Table(name = "accounts")
@@ -75,7 +72,6 @@ public class Account {
     }
 
     private Account(
-            String name,
             String email,
             String passphrase,
             Status status,
@@ -84,7 +80,6 @@ public class Account {
     ) {
         this.email = email;
         this.passphrase = passphrase;
-        this.nickname = name;
         this.status = status;
         this.addRoles(roles);
         this.created_at = created_at;
@@ -98,6 +93,12 @@ public class Account {
                 email,
                 passphrase,
                 Status.ACTIVE,
+                Collections.singletonList(
+                        Role.of(
+                                Role.Name.ORGANIZATION_USER,
+                                Resource.organization()
+                        )
+                ),
                 LocalDateTime.now(ZoneId.of("Asia/Seoul"))
         );
     }
@@ -117,23 +118,23 @@ public class Account {
         );
     }
 
+
     public boolean isAdmin() {
         return this.roles.stream().anyMatch(Role::isAdmin);
     }
 
     private void checkRoleAddable(Role role) {
-        if (this.getMatchedRole(role.getResource(), role.getAuthority().getName()).isPresent()) {
+        if (this.getMatchedRole(role.getResource(), role.getName()).isPresent()) {
             throw new BadRequestException(String.format(
-                    "account '%s' already has role of authority '%s' at '%s' '%s'",
+                    "account '%s' already has role of authority '%s' at '%s'",
                     this.getId(),
-                    role.getAuthority().getName(),
-                    role.getResource().getType(),
-                    role.getResource().getId()
+                    role.getName(),
+                    role.getResource().getType()
             ));
         }
         if (role.getResource().isGroup() && this.hasAnyRoleOf(role.getResource())) {
             throw new BadRequestException(
-                    String.format("account '%s' already has role of group '%s'", this.getId(), role.getResource().getId())
+                    String.format("account '%s' already has role of group '%s'", this.getId(), role.getResource())
             );
         }
     }
@@ -206,15 +207,15 @@ public class Account {
         this.passphrase = passphrase;
     }
 
-    public Optional<Role> getMatchedRole(Resource resource, Authority.Name authorityName) {
+    public Optional<Role> getMatchedRole(Resource resource, Role.Name roleName) {
         return this.roles.stream()
-                .filter(role -> role.isSameResource(resource) && role.isSameAuthority(authorityName))
+                .filter(role -> role.isSameResource(resource) && role.isSameRole(roleName))
                 .findFirst();
     }
 
-    public void deleteMatchedRole(Resource resource, Authority.Name authorityName) {
+    public void deleteMatchedRole(Resource resource, Role.Name roleName) {
         this.roles.removeIf(role ->
-                role.isSameResource(resource) && role.isSameAuthority(authorityName)
+                role.isSameResource(resource) && role.isSameRole(roleName)
         );
     }
 

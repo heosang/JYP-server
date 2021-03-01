@@ -9,6 +9,7 @@ import java.util.Arrays;
 public enum Permission {
     // Org Operation Permission
 
+
     // Common Group Permission
     CREATE_GROUP(Name.CREATE_GROUP, Resource.Type.GROUP),
     CREATE_GROUP_ACCOUNTS(Name.CREATE_GROUP_ACCOUNTS, Resource.Type.GROUP),
@@ -26,7 +27,6 @@ public enum Permission {
     RESTART_GAME(Name.RESTART_GAME, Resource.Type.GAME),
     APPROVE_APPEAL(Name.APPROVE_APPEAL, Resource.Type.GAME),
     DECLINE_APPEAL(Name.DECLINE_APPEAL, Resource.Type.GAME);
-
 
     private final String name;
     private final Resource.Type target;
