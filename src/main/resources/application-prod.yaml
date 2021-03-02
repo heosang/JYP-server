@@ -13,7 +13,7 @@ app:
       size: 3
 
   jyp:
-    url: https://test-jyp.herokuapp.com
+    url: https://jyp-test.herokuapp.com
     secret:
     access-token:
     file:
