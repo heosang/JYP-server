@@ -2,7 +2,7 @@ spring:
   application:
     name: jyp-server-prod
 app:
-  name: jyp-server
+  name: jyp-test
   security:
     jwt:
       expires-in:
@@ -13,7 +13,7 @@ app:
       size: 3
 
   jyp:
-    url: https://project-jyp.herokuapp.com
+    url: https://test-jyp.herokuapp.com
     secret:
     access-token:
     file:
